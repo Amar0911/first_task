@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "marvel/css/style.css" %}>
+    <title>Document</title>
+</head>
+<body>
+    <h1>I am {{superhero}}</h1>
+
+   {% if superhero == 'spidermans' %}
+   <h1>Spidy is back</h1>
+   {% elif villian == 'Venom' %}
+   <h1>Villian name </h1>
+   {% else %}
+   <h1>World</h1>
+   {% endif %}
+
+   {% for i in villian %}
+   {{i}}
+   {% endfor %}
+
+<h1>I am {{superhero.bat}}</h1>
+
+
+</body>
+</html>
