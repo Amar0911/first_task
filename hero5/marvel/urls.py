@@ -4,5 +4,3 @@ from . import views
 urlpatterns = [
     path('spiderman/', views.spiderman)
 ]
-
-
