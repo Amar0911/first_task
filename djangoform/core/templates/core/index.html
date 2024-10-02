@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Django Form</h1>
+
+    <Form>
+        <table>
+            {{MarvelForm.as_table}}
+            <hr>
+            {{MarvelForm.as_p}}
+            <hr>
+            {{MarvelForm.as_ul}}
+            <hr>
+        </table>
+        <input type="submit" name="" id="">
+    </Form>
+
+    <h1>Name Field</h1>
+    MarvelForm.name:  {{MarvelForm.name}} <br><br>
+    MarvelForm.name.label :  {{MarvelForm.name.label}} <br><br>
+    MarvelForm.name.label_tag: {{MarvelForm.name.label_tag}}<br><br>
+    MarvelForm.name.id_for_label: {{MarvelForm.name.id_for_label}}<br><br>
+    MarvelForm.name.value: {{MarvelForm.name.value}}<br><br>
+    MarvelForm.name.html_name: {{MarvelForm.name.html_name}}<br><br>
+    help text: {{MarvelForm.name.help_text}}<br><br>
+    name .name{{MarvelForm.name.name}}<br><br>
+
+    <h1>For Loop</h1>
+
+    {% for m in MarvelForm %}
+     {{m.label_tag}} {{m}}<br><br>
+    
+    {% endfor %}
+
+
+</body>
+</html>
