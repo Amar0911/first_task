@@ -11,7 +11,7 @@ def index(request):
             print('email',mf.cleaned_data['email'])
         mf= MarvelForm()
         return redirect('success/')
-        return render( request,'core/success.html',{'name':name})
+        # return render( request,'core/success.html',{'name':name})
     else:
         mf= MarvelForm()
     return render(request,'core/index.html',{'mf':mf})
