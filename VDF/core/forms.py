@@ -1,8 +1,8 @@
 from django import forms
 
 class MarvelForm(forms.Form):
-    name = forms.CharField(error_messages={'required':'Please Enter your Name'})
-    email = forms.EmailField()
+    name = forms.CharField(error_messages={'required':'Please Enter your Name'}, label='Full Name')
+    email = forms.EmailField(error_messages={'required':'Please Enter your Email'})
 
 
     # for single field
