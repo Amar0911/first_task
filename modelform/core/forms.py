@@ -22,6 +22,5 @@ class MarvelForm(forms.ModelForm):
         widgets = {
             # 'name': forms.PasswordInput(),
             'heroic_name': forms.TextInput(attrs={'class':'form-control'})
-
         }
 
