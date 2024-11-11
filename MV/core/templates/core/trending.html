@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="container-fluid">
+    <div class="drag">
+        <main class="slider"> 
+            <div class="see-more">
+                <h5 class="heading" style="color: white;">Top Trending Movies</h5>
+                <a href="card.html"><h5 class="head" style="color: white;">See More</h5><i class="bi bi-chevron-right" id="right-icon"></i></a>
+            </div>
+            <div class="slider-track">
+                <a href="#">
+                    {% for t in trend %}
+                        <div class="cards">
+                            <img src="{{t.movie_image.url}}" class="card-image" alt="{{ t.name }}">
+                            <pre class="card-details">{{t.name}}          4.3/5 <i class="bi bi-star-fill"></i></pre>
+                        </div>
+                    {% endfor %}
+                    </a>
+                </div>
+            </main>
+        </div>
+</div>
