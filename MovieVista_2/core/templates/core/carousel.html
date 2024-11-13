@@ -1,0 +1,40 @@
+
+
+{% load static %}
+
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      {% for cm in cm %}
+        <div class="carousel-item active">
+          <a href="">
+          <img src="{{cm.carousel_image.url}}" class="d-block w-100" alt="..." height="500px">
+          </a>
+          <div class="carousel-caption">
+            <div class="content">
+                <h1 id="title">{{cm.name}}</h1>
+                <p>{{cm.description}}</p>
+              <div class="details">
+                  <h6>{{cm.movie_vista_original}}</h6>
+                  <h5 id="gen">{{cm.genre}}</h5>
+                  <h4 id="years">{{cm.release_year}}</h4>
+                  <h3><span id="rates">{{cm.imdb}}</span><i class="fa-solid fa-star"></i>{{cm.rating}}</h3>
+              </div>
+            </div>
+            <a href="" class="btns">
+            <button type="button" class="watch">Watch Now</button>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
