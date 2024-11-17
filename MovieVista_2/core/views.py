@@ -2,14 +2,21 @@ from django.shortcuts import render,redirect
 from .forms import Registerform,AuthenticationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .models import Carousel_movies,Trending_movies
+from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood
 
 # Create your views here.
 
 def index(request):
-    cm = Carousel_movies.objects.all()
-    tm = Trending_movies.objects.all()
-    return render(request,'core/index.html',{'cm':cm,'tm':tm})
+    cm = Carousel_movies.objects.all()   #cm - Craousel movie
+    tm = Trending_movies.objects.all()   #tm - Trending movie
+    am = Anime_movies.objects.all()      #am - Anime
+    im = Indian_movies.objects.all()     #im - Indian movie
+    ws = Webseries.objects.all()         #ws - Webseries
+    hm = Hollywood.objects.all()         #hm - Hollywood movie
+    return render(request,'core/index.html',{'cm':cm,'tm':tm, 'am':am, 'im':im, 'ws': ws, 'hm': hm})
+
+def seemore(request):
+    return render(request,'core/seemore.html')
 
 
 
@@ -64,11 +71,3 @@ def about(request):
 def contact(request):
     return render(request,'core/contact.html')
 
-
-def carousel(request):
-    cm = Carousel_movies.objects.all()
-    return render(request,'core/index.html',{'cm':cm})
-
-def trending(request):
-    tm = Trending_movies.objects.all()
-    return render(request,'core/index.html',{'tm':tm})
