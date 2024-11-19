@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from .forms import Registerform,AuthenticationForm
-from django.contrib.auth import authenticate,login,logout
+from .forms import Registerform,AuthenticationForm,ChangePasswordForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood
 
@@ -68,3 +68,21 @@ def about(request):
 def contact(request):
     return render(request,'core/contact.html')
 
+
+def changepassword(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            cp = ChangePasswordForm(request.user, request.POST)
+            if cp.is_valid():
+                cp.save()
+                update_session_auth_hash(request, cp.user)
+                return redirect('profile')
+        else:
+            cp = ChangePasswordForm(request.user)
+        return render(request,'core/changepassword.html',{'cp':cp})
+    else:
+        return redirect('login')
+
+
+def edit(request):
+    return render(request,'core/edit.html')

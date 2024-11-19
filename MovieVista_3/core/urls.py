@@ -16,6 +16,8 @@ urlpatterns = [
     path('logout/',views.log_out,name='logout'),
     path('about/',views.about,name='about'),
     path('contact/',views.contact,name='contact'),
+    path('changepassword/',views.changepassword,name='changepassword'),
+    path('edit/',views.edit,name='edit'),
 ]
 
 

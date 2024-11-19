@@ -10,7 +10,7 @@
     section {
       font-family: Arial, sans-serif;
       background-image: linear-gradient(rgb(0, 0, 0), rgb(55, 49, 103), rgb(46, 38, 155));
-      color: #080707;
+      color: rgb(8, 7, 7);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -28,35 +28,59 @@
       text-align: center;
     }
 
+    form input[type="password"] {
+      width: 90%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid rgb(68, 68, 68);
+      background-color: rgb(30, 30, 30);
+      color: white;
+      font-size: 16px;
+  }
+
+  form input[type="password"]:focus {
+    border-color: rgb(1, 30, 61);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background: white;
+    color: black;
+  }
+
+  
+
+  form input[type="text"] {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid rgb(68, 68, 68);
+    background-color: rgb(30, 30, 30);
+    color: white;
+    font-size: 16px;
+}
+
+form input[type="text"]:focus {
+  border-color: rgb(1, 30, 61);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  background: white;
+  color: black;
+}
+
+
     .login-title {
       font-size: 28px;
       font-weight: bold;
-      color: #f7c948;
+      color: rgb(247, 201, 72);
       margin-bottom: 20px;
     }
 
-    .form-control {
-      width: 100%;
-      padding: 15px 5px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-      background: #333;
-      color: red;
-      font-size: 16px;
-      box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s, color 0.3s;
-    }
 
-    .form-control:hover {
-      background-color: #000;
-      color: #fff;
-      
-    }
 
     .login-btn {
       background: linear-gradient(0deg, #00bdff, #0079ff);
-      color: #222;
+      color: rgb(34, 34, 34);
       border: none;
       border-radius: 8px;
       padding: 10px;
@@ -109,7 +133,7 @@
     .register-link {
       display: block;
       margin-top: 10px;
-      color: #fff;
+      color: rgb(255, 255, 255);
       text-decoration: none;
       font-size: 16px;
       transition: color 0.3s;
@@ -123,7 +147,7 @@
     .forgot-password {
       display: block;
       margin-top: 10px;
-      color: #f7c948;
+      color: rgb(247, 201, 72);
       text-decoration: none;
       font-size: 16px;
       transition: color 0.3s;
@@ -132,7 +156,7 @@
     
 
     .note {
-      color: #f7c948;
+      color: rgb(247, 201, 72);
     }
 
     label {
@@ -149,7 +173,7 @@
     <form action="" method="POST" novalidate>
       {% csrf_token %}
       {% for rf in rf %}
-        <label for="{{ rf.id_for_label }}" style="display: block; font-size: 16px; margin-top: 10px; color: #aaa; padding:0 20px; color:white;">{{ rf.label_tag }}</label>
+        <label for="{{ rf.id_for_label }}" style="display: block; font-size: 20px; margin-top: 10px; color: #aaa; padding:0 20px; color:white;">{{ rf.label }}</label>
         {{ rf }}
         <br>
         <small style="color: red;">{{ rf.errors|striptags }}</small>
