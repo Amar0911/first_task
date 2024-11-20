@@ -17,7 +17,12 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('contact/',views.contact,name='contact'),
     path('changepassword/',views.changepassword,name='changepassword'),
-    path('edit/',views.edit,name='edit'),
+    path('seemore_trending/',views.seemore_trending,name='seemore_trending'),
+    path('seemore_anime/',views.seemore_anime,name='seemore_anime'),
+    path('seemore_indian/',views.seemore_indian,name='seemore_indian'),
+    path('seemore_webseries/',views.seemore_webseries,name='seemore_webseries'),
+    path('seemore_hollywood/',views.seemore_hollywood,name='seemore_hollywood'),
+    path('cardplay/<int:id>/',views.cardplay,name='cardplay'),
 ]
 
 
