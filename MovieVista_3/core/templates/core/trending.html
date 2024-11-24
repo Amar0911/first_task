@@ -188,7 +188,7 @@ a {
               <div class="slider-track">
                 {% for tm in tm  %}
                   <div class="cards">
-                    <a href="">
+                    <a href="{% url "cardplay" tm.id %}">
                       <img src="{{tm.trending_image.url}}" class="card-image" alt="Tumbbad">
                       <div class="card-details">
                         <h4 id="title">{{tm.name}}</h>

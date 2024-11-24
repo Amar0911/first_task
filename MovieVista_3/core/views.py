@@ -1,11 +1,25 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import Registerform,AuthenticationForm,ChangePasswordForm,AdminProfileForm,UserProfileForm,CustomerForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood
 
-# Create your views here.
 
+#================ Forgot Password ======================
+
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+
+##########################################################################################################################################
+
+
+# Create your views here.
 
 
 def index(request):
@@ -19,7 +33,7 @@ def index(request):
 
 
 
-############################################################## seemore ####################################################
+############################################################## seemore ##############################################################
 
 
 
@@ -52,10 +66,30 @@ def seemore_hollywood(request):
 
 ############################################################## cardplay ####################################################
 
+def cardplay_carousel(request,id):
+    cm = Carousel_movies.objects.get(pk=id)
+    return render(request,'core/cardplay_carousel.html',{'cm': cm}) 
+
 
 def cardplay(request,id):
     tm = Trending_movies.objects.get(pk=id)
     return render(request,'core/cardplay.html',{'tm': tm}) 
+
+def cardplay_anime(request,id):
+    am = Anime_movies.objects.get(pk=id)
+    return render(request,'core/cardplay_anime.html',{'am': am}) 
+
+def cardplay_indian(request,id):
+    im = Indian_movies.objects.get(pk=id)
+    return render(request,'core/cardplay_indian.html',{'im': im}) 
+
+def cardplay_webseries(request,id):
+    ws = Webseries.objects.get(pk=id)
+    return render(request,'core/cardplay_webseries.html',{'ws': ws}) 
+
+def cardplay_hollywood(request,id):
+    hm = Hollywood.objects.get(pk=id)
+    return render(request,'core/cardplay_hollywood.html',{'hm': hm}) 
 
 
 
@@ -169,6 +203,59 @@ def changepassword(request):
     
 
 
-############################################################## Edit Profile ###############################################################
+
+############################################################# Forget Password #########################################################
+    
+
+def forgotpassword(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        user = User.objects.filter(email=email).first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_url = request.build_absolute_uri(f'/resetpassword/{uidb64}/{token}/')           
+            send_mail(
+                'Password Reset',
+                f'Click the following link to reset your password: {reset_url}',
+                'cricketguru798@gmail.com', 
+                [email],
+                fail_silently=False,
+            )
+            return redirect('passwordresetdone')
+        else:
+            messages.success(request,'please enter valid email address')
+    return render(request, 'core/forgotpassword.html')                                        
+    
+
+def resetpassword(request, uidb64, token):
+    if request.method == 'POST':
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        if password == password2:
+            try:
+                uid = force_str(urlsafe_base64_decode(uidb64))
+                user = User.objects.get(pk=uid)
+                if default_token_generator.check_token(user, token):
+                    user.set_password(password)
+                    user.save()
+                    return redirect('passwordresetdone')
+                else:
+                    return HttpResponse('Token is invalid', status=400)
+            except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+                return HttpResponse('Invalid link', status=400)
+        else:
+            return HttpResponse('Passwords do not match', status=400)
+    return render(request, 'core/resetpassword.html')
+
+def password_reset_done(request):
+    return render(request, 'core/password_reset_done.html')
+
+
+
+
+######################################################## Add to Watchlist ##############################################################
+
+
 
 

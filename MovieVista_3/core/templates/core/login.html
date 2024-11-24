@@ -182,7 +182,7 @@ form input[type="text"]:focus {
       <button type="submit" class="login-btn">Login</button>
     </form>
     <a href="{% url 'signup' %}" class="register-link">Don't have an account? <p class="note">Register</p></a>
-    <a href="#" class="forgot-password">Forgot Password?</a>
+    <a href="{% url "forgotpassword" %}" class="forgot-password">Forgot Password?</a>
   </div>
 </section>
 

@@ -160,7 +160,7 @@
   <div class="carousel-inner">
     {% for cm in cm %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-          <a href="">
+          <a href="{% url "cardplay_carousel" cm.id %}">
           <img src="{{cm.carousel_image.url}}" class="d-block w-100" alt="..." height="500px">
         </a>
           <div class="carousel-caption">

@@ -1,5 +1,7 @@
 {% extends "core/base.html" %}
 
+{% block title %} Trending Movies{% endblock title %}
+
 {% block content %}
 
 <style>
@@ -55,16 +57,21 @@
   }
   
   .card-wish {
-    background: white;
+    background: red;
     border: none;
-    color: black;
+    color: white;
   }
 
   .card-wish:hover {
-    color: white;
+    color: black;
+    background: red;
   }
   
-  
+  .butt-group .btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
   </style>
 
 

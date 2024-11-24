@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 
-{% block title %} {{tm.name}} {% endblock title %}
+{% block title %} {{ws.name}} {% endblock title %}
 
 {% block content %}
 
@@ -41,7 +41,7 @@
     position: absolute;
     top: 70px;
     left: 0;
-    padding: 30px;
+    padding: 20px;
     color: #fff;
     flex-direction: column;
   }
@@ -181,19 +181,19 @@
     <div id="cardplay" class="container"> 
     <div class="movie-card"> 
         <div class="movie-image"> 
-            <img src="{{ tm.trending_image.url }}" class="" alt=""> 
+            <img src="{{ ws.webseries_image.url }}" class="" alt=""> 
             <div class="movie-details"> 
                 <div class="movie-summary"> 
-                    <h1 id="title">{{ tm.name }}</h1>
-                    <p>{{tm.description}}</p>
+                    <h1 id="title" style="color: white;">{{ ws.name }}</h1>
+                    <p>{{ws.description}}</p>
                     <ul class="movie-info">
-                        <li><strong>Starcast:</strong> {{tm.starcast}}</li>
-                        <li><strong>Director:</strong> {{tm.director}}</li>
+                        <li><strong>Starcast:</strong> {{ws.starcast}}</li>
+                        <li><strong>Director:</strong> {{ws.director}}</li>
                     </ul>
                     <h6>Movie Vista Original</h6> 
-                    <h5 id="genre">{{tm.genre}}</h5>
-                    <h4 id="yeear">{{tm.year}}</h4>
-                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{tm.rating}}</span></h3>
+                    <h5 id="genre">{{ws.genre}}</h5>
+                    <h4 id="yeear">{{ws.year}}</h4>
+                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{ws.rating}}</span></h3>
                 </div>
                 <div class="button-group">
                     <a href="Trendingmovietrailer/John wick.mp4" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>

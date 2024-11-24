@@ -1,5 +1,7 @@
 {% extends "core/base.html" %}
 
+{% block title %}Anime{% endblock title %}
+
 {% block content %}
 
 <style>
@@ -31,6 +33,7 @@
     border-radius: 10px;
     background: rgba(41, 40, 40, 0.5);
     display: inline-block;
+    color: white;
   }
   
   .card-body .butt-group {
@@ -54,15 +57,20 @@
   }
   
   .card-wish {
-    background: white;
+    background: red;
     border: none;
-    color: black;
+    color: white;
   }
 
   .card-wish:hover {
-    color: white;
+    color: black;
+    background: red;
   }
   
+  .butt-group .btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  } 
   
   </style>
 
@@ -77,20 +85,22 @@
 
     {% for am in am %}
     <div class="col-md-3 mb-3">
-      <div class="card hover-effect">
-        <img src="{{ am.anime_image.url }}" class="card-img-top" alt="Card Image" style="width: 100%; height: 200px; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title">{{ am.name }}</h5>
-          <div class="butt-group">
-            <a href="Trendingmovietrailer/Tumbbad Trailer.mp4">
-              <button class="btn btn-watch card-watch"><i class="fa-solid fa-film"></i> Watch Trailer</button>
-            </a>
-            <a href="">
-              <button class="btn btn-wishlist card-wish"><i class="fa-regular fa-heart"></i> Watchlist</button>
-            </a>
+      <a href="{% url "cardplay_anime" am.id %}">
+        <div class="card hover-effect">
+          <img src="{{ am.anime_image.url }}" class="card-img-top" alt="Card Image" style="width: 100%; height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ am.name }}</h5>
+            <div class="butt-group">
+              <a href="Trendingmovietrailer/Tumbbad Trailer.mp4">
+                <button class="btn btn-watch card-watch"><i class="fa-solid fa-film"></i> Watch Trailer</button>
+              </a>
+              <a href="">
+                <button class="btn btn-wishlist card-wish"><i class="fa-regular fa-heart"></i> Watchlist</button>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
     {% endfor %}
   </div>

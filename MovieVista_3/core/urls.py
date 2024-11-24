@@ -17,12 +17,21 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('contact/',views.contact,name='contact'),
     path('changepassword/',views.changepassword,name='changepassword'),
+    path('forgotpassword/',views.forgotpassword, name="forgotpassword"),
+    path('resetpassword/<uidb64>/<token>/', views.resetpassword, name='resetpassword'),
+    path('password_reset_done/', views.password_reset_done, name='passwordresetdone'),
     path('seemore_trending/',views.seemore_trending,name='seemore_trending'),
     path('seemore_anime/',views.seemore_anime,name='seemore_anime'),
     path('seemore_indian/',views.seemore_indian,name='seemore_indian'),
     path('seemore_webseries/',views.seemore_webseries,name='seemore_webseries'),
     path('seemore_hollywood/',views.seemore_hollywood,name='seemore_hollywood'),
     path('cardplay/<int:id>/',views.cardplay,name='cardplay'),
+    path('cardplay_anime/<int:id>/',views.cardplay_anime,name='cardplay_anime'),
+    path('cardplay_indian/<int:id>/',views.cardplay_indian,name='cardplay_indian'),
+    path('cardplay_webseries/<int:id>/',views.cardplay_webseries,name='cardplay_webseries'),
+    path('cardplay_hollywood/<int:id>/',views.cardplay_hollywood,name='cardplay_hollywood'),
+    path('cardplay_carousel/<int:id>/',views.cardplay_carousel,name='cardplay_carousel'),
+    
 ]
 
 

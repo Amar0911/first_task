@@ -80,7 +80,6 @@ class Carousel_movies(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     carousel_image =models.ImageField(upload_to='carousel_images')  
 
     def __str__(self):
@@ -103,7 +102,6 @@ class Trending_movies(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     trending_image =models.ImageField(upload_to='trending_images')  
 
     def __str__(self):
@@ -129,7 +127,6 @@ class Anime_movies(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     anime_image =models.ImageField(upload_to='anime_images')  
 
     def __str__(self):
@@ -153,7 +150,6 @@ class Indian_movies(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     indian_image =models.ImageField(upload_to='indian_images')  
 
     def __str__(self):
@@ -172,7 +168,6 @@ class Webseries(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     webseries_image =models.ImageField(upload_to='webseries_images')  
 
     def __str__(self):
@@ -191,7 +186,6 @@ class Hollywood(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1, default='0.0')
     starcast = models.CharField(max_length=200, default=2)
     director = models.CharField(max_length=100, default=2)
-    producers = models.CharField(max_length=100, default=2)
     hollywood_image =models.ImageField(upload_to='hollywood_images')  
 
     def __str__(self):

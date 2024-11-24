@@ -15,7 +15,7 @@
                 
               {% for im in im %}
                 <div class="cards">
-                  <a href="">
+                  <a href="{% url "cardplay_indian" im.id %}">
                     <img src="{{im.indian_image.url}}" class="card-image" alt="Tanhaji">
                     <div class="card-details">
                       <h4 id="title">{{im.name}}</h>
