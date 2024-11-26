@@ -272,3 +272,4 @@ def watchlistadd(request, id):
 def watchlist(request):
     movie = Movies.objects.filter(user=request.user)
     return render(request, 'core/watchlist.html',{'movie':movie})
+

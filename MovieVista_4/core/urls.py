@@ -33,8 +33,6 @@ urlpatterns = [
     path('cardplay_carousel/<int:id>/',views.cardplay_carousel,name='cardplay_carousel'),
     path('watchlistadd/<int:id>/',views.watchlistadd,name='watchlistadd'),
     path('watchlist/',views.watchlist,name='watchlist'),
-   
-
     
 ]
 
