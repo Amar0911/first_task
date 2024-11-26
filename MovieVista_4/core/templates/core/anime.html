@@ -1,0 +1,36 @@
+
+{% load static %}
+
+
+
+<!--Anime movie-->
+
+<div class="container-fluid">
+    <div class="drag">
+        <main class="slider"> 
+          <div class="see-more">
+            <h5 class="heading" style="color: white;">Anime</h5>
+             <a href="{% url "seemore_anime" %}"><h5 class="head" style="color: white;">See More</h5><i class="fa-solid fa-chevron-right" id="right-icon"></i></a>
+            </div>
+            <div class="slider-track">
+              
+              {% for am in am %}
+                <div class="cards">
+                  <a href="{% url "cardplay_anime" am.id %}">
+                    <img src="{{am.anime_image.url}}" class="card-image" alt="dandadan">
+                    <div class="card-details">
+                        <h4 id="title">{{am.name}}</h>
+                          <div class="details-card">
+                            <h5 id="gen">{{am.genre}}</h5>
+                            <h4 id="year">{{am.release_year}}</h4>
+                            <h3 id="rate"><span>IMDB</span><i class="fa-solid fa-star"></i>{{am.rating}}</h3>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+              {% endfor %}
+                    
+            </div>
+        </main>
+    </div>
+</div>

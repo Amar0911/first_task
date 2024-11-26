@@ -1,0 +1,209 @@
+{% extends "core/base.html" %}
+
+{% block title %} {{cm.name}} {% endblock title %}
+
+{% block content %}
+
+<style>
+    
+.container {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .movie-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .movie-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .movie-image img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(1);
+  }
+  
+  .movie-details {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: 20px;
+    color: #fff;
+    flex-direction: column;
+  }
+
+  .movie-details:hover {
+    background: rgb(0, 0, 0, .2)
+  }
+  
+  .movie-summary {
+    max-width: 500px;
+  }
+  
+  #title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .movie-summary p {
+    font-size: .8rem;
+    margin-bottom: 15px;
+  }
+  
+  .movie-info {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .movie-info li {
+    margin-bottom: 5px;
+  }
+  
+  h6, #genre, #yeear {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffc107;
+    font-weight: 400;
+  }
+  
+  #genre, #yeear {
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .fa-solid {
+    font-size: 1.3rem;
+  }
+
+  .movie-summary h3 {
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .movie-summary h3 #rating {
+    background: yellow;
+    color: #000;
+    padding: 0px 3px;
+    margin: 0px 5px 0px 5px;
+    font-weight: 300;
+    font-size: 15px;
+  }
+  
+  .movie-summary h3 i {
+    margin: 2px;
+  }
+  
+  
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-play {
+    background-color: #ffc107;
+    border: 2px solid #ffc107;
+  }
+  
+  .btn-play:hover {
+    background-color: #ffb300;
+  }
+  
+  .btn-wishlist {
+    background-color: red;
+    border: 2px solid #dc3545;
+  }
+  
+  .btn-wishlist:hover {
+    background-color: #c82333;
+  }
+  
+  .btn i {
+    margin-right: 8px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #title {
+        font-size: 1.5rem;
+    }
+  
+    .movie-summary p {
+        font-size: 0.9rem;
+    }
+  
+    .movie-info {
+        font-size: 0.8rem;
+    }
+  
+    .button-group .btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+  }
+  
+</style>
+
+<br><br>
+
+    <div id="cardplay" class="container"> 
+    <div class="movie-card"> 
+        <div class="movie-image"> 
+            <img src="{{ cm.carousel_image.url }}" class="" alt=""> 
+            <div class="movie-details"> 
+                <div class="movie-summary"> 
+                    <h1 id="title">{{ cm.name }}</h1>
+                    <p>{{cm.description}}</p>
+                    <ul class="movie-info">
+                        <li><strong>Starcast:</strong> {{cm.starcast}}</li>
+                        <li><strong>Director:</strong> {{cm.director}}</li>
+                    </ul>
+                    <h6>Movie Vista Original</h6> 
+                    <h5 id="genre">{{cm.genre}}</h5>
+                    <h4 id="yeear">{{cm.year}}</h4>
+                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{cm.rating}}</span></h3>
+                </div>
+                <div class="button-group">
+                    <a href="Trendingmovietrailer/John wick.mp4" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
+                    <a href="#" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
+                </div> 
+            </div>
+        </div> 
+    </div> 
+  </div>
+
+  <br><br>
+
+{% endblock content %}

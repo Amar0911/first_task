@@ -1,0 +1,193 @@
+
+
+{% load static %}
+
+<style>
+  
+.content {
+  position: relative;
+  justify-content: start;
+  text-align: start;
+  align-items: start;
+}
+
+.content h1 {
+  font-size: 30px;
+}
+
+
+.details {
+  display: flex;
+  align-items: center;
+}
+
+.details h6 {
+  color: rgb(255, 255, 255, 0.8);
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.details h5 {
+  color: rgb(142, 230, 48);
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+#years {
+  color: #fff;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.details h3 {
+  color: rgb(255, 255, 255, 0.8);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.details h3 #rates {
+  background: yellow;
+  color: #000;
+  padding: 0px 3px;
+  margin: 0px 5px 0px 5px;
+  font-weight: 500;
+}
+
+.details h3 i {
+  margin: 5px;
+}
+
+.btns {
+  justify-content: center;
+}
+
+.watch {
+  background-color: rgb(17, 12, 12);
+  color: #ec1919;
+  padding: 8px;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: 10px;
+}
+
+
+.watch:hover {
+  background-color: #ec1919;
+  color: rgb(17, 12, 12);
+}
+
+/* responsive */
+
+@media (max-width:576px) {
+  .content h1 {
+    font-size: 15px;
+  }
+  
+  .content p {
+    font-size: 8px;
+    width: 100;
+    word-break: break-all;
+  }
+  
+  .details {
+    display: flex;
+    align-items: center;
+  }
+  
+  .details h6 {
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 8px;
+    margin-right: 6px;
+  }
+  
+  .details h5 {
+    color: rgb(142, 230, 48);
+    font-size: 8px;
+    margin-right: 6px;
+  }
+  
+  #years {
+    color: #fff;
+    font-size: 8px;
+    margin-right: 6px;
+  }
+  
+  .details h3 {
+    color: rgb(255, 255, 255, 0.8);
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .details h3 #rates {
+    background: yellow;
+    color: #000;
+    padding: 0px 3px;
+    margin: 0px 5px 0px 5px;
+    font-weight: 300;
+  }
+  
+  .details h3 i {
+    margin: 2px;
+  }
+  
+  .btns {
+    justify-content: center;
+  }
+  
+  .watch {
+    background-color: rgb(17, 12, 12);
+    color: #ec1919;
+    padding: 6px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 10px;
+  }
+  
+  
+  .watch:hover {
+    background-color: #ec1919;
+    color: rgb(17, 12, 12);
+  }
+}
+
+</style>
+
+{% block content %}
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% for cm in cm %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <a href="{% url "cardplay_carousel" cm.id %}">
+          <img src="{{cm.carousel_image.url}}" class="d-block w-100" alt="..." height="500px">
+        </a>
+          <div class="carousel-caption">
+            <div class="content">
+                <h1 id="title">{{cm.name}}</h1>
+                <p>{{cm.description}}</p>
+              <div class="details">
+                  <h6>{{cm.movie_vista_original}}</h6>
+                  <h5 id="gen">{{cm.genre}}</h5>
+                  <h4 id="years">{{cm.release_year}}</h4>
+                  <h3><span id="rates">{{cm.imdb}}</span><i class="fa-solid fa-star"></i>{{cm.rating}}</h3>
+              </div>
+            </div>
+            <a href="" class="btns">
+            <button type="button" class="watch">Watch Now</button>
+          </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  {% endblock content %}
