@@ -26,9 +26,20 @@
   }
   
   .movie-image {
-    position: absolute;
+    position: relative; 
     width: 100%;
     height: 100%;
+  }
+
+  .movie-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%; 
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    pointer-events: none; 
   }
   
   .movie-image img {
@@ -133,21 +144,25 @@
   }
   
   .btn-play {
-    background-color: #ffc107;
-    border: 2px solid #ffc107;
+    background-color: rgb(0, 0, 0, 0.5);
+    border: 2px solid white;
   }
   
   .btn-play:hover {
-    background-color: #ffb300;
+    background-color: white;
+    border: 2px solid white;
+    color: black;
   }
   
   .btn-wishlist {
-    background-color: red;
-    border: 2px solid #dc3545;
+    background-color: rgb(0, 0, 0, 0.5);
+    border: 2px solid white;
   }
   
   .btn-wishlist:hover {
-    background-color: #c82333;
+    background-color: white;
+    border: 2px solid white;
+    color: black;
   }
   
   .btn i {
@@ -192,7 +207,7 @@
                     </ul>
                     <h6>Movie Vista Original</h6> 
                     <h5 id="genre">{{cm.genre}}</h5>
-                    <h4 id="yeear">{{cm.year}}</h4>
+                    <h4 id="yeear">{{cm.release_year}}</h4>
                     <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{cm.rating}}</span></h3>
                 </div>
                 <div class="button-group">
