@@ -262,14 +262,20 @@ def watchlistadd(request, id):
     if request.user.is_authenticated:
         movie =Trending_movies.objects.get(pk=id)
         user = request.user
-        Movies(user=user, films=movie).save()
-        messages.success(request,'Added to Watchlist')
+        if Movies.objects.filter(user=user, films=movie).exists():
+            messages.error(request, 'This movie is already added in your Watchlist')
+        else:
+            Movies(user=user, films=movie).save()
+            messages.success(request,'Added to Watchlist')
         return redirect('seemore_trending')
     else:
         return redirect('login')
 
 
 def watchlist(request):
-    movie = Movies.objects.filter(user=request.user)
-    return render(request, 'core/watchlist.html',{'movie':movie})
+    if request.user.is_authenticated:
+        movie = Movies.objects.filter(user=request.user)
+        return render(request, 'core/watchlist.html',{'movie':movie})
+    else:
+        return redirect('login')
 

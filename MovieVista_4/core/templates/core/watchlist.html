@@ -110,23 +110,25 @@
     </div>
     {% for m in movie %}
     <div class="col-md-3 mb-3">
-      <div class="wish-card hover-effect">
-        <img src="{{ m.films.trending_image.url }}" class="wish-card-img-top" alt="Card Image">
-        <div class="wish-card-body">
-          <h5 class="wish-card-title" >{{ m.films.name }}</h5>
-          <div class="wish-button">
-            <a href="">
-              <button class="btn btn-watch"><i class="fa-solid fa-film"></i> Watch Trailer</button>
-            </a>
-            <a href="#">
-              <label class="btn btn-wishlist card-wish">
-                <input type="checkbox" class="wish-toggle" style="display: none;">
-                <i class="fa-regular fa-heart"></i> Watchlist
-              </label>
-            </a>
-          </div>                   
+      <a href="{% url "cardplay" m.films.id %}">
+        <div class="wish-card hover-effect">
+          <img src="{{ m.films.trending_image.url }}" class="wish-card-img-top" alt="Card Image">
+          <div class="wish-card-body">
+            <h5 class="wish-card-title" style="color: white;">{{ m.films.name }}</h5>
+            <div class="wish-button">
+              <a href="">
+                <button class="btn btn-watch"><i class="fa-solid fa-film"></i> Watch Trailer</button>
+              </a>
+              <a href="#">
+                <label class="btn btn-wishlist card-wish">
+                  <input type="checkbox" class="wish-toggle" style="display: none;">
+                  <i class="fa-regular fa-heart"></i> Watchlist
+                </label>
+              </a>
+            </div>                   
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     {% endfor %}
   </div>

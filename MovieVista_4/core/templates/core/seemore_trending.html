@@ -71,22 +71,44 @@
     padding: 8px 15px;
   }
 
+  .message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; 
+    width: 300px; 
+    text-align: center;
+    margin: auto; 
+    border-radius: 5px; 
+  }
+
+
   </style>
 
 
 <!--card section-->
 <br>
 <div class="container-fluid">
+
+  {% if messages %}
+    <div class="alert alert-danger message-container">
+        {% for message in messages %}
+            <span>{{ message }}</span>
+        {% endfor %}
+    </div>
+  {% endif %}
+
   <div class="row">
     <div class="see-more">
       <h5 class="heading" style="color: white;">Trending Movies</h5>
     </div>
 
+
     {% for tm in tm %}
     <div class="col-md-3 mb-3">
-        <a href="{% url "cardplay" tm.id %}"> 
+      <a href="{% url "cardplay" tm.id %}"> 
         <div class="card hover-effect">
-          <img src="{{ tm.trending_image.url }}" class="card-img-top" alt="Card Image" style="width: 100%; height: 200px; object-fit: cover;">
+          <img src="{{ tm.trending_image.url }}" class="card-img-top" alt="Card Image" style="width: 100%; height: 100%; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">{{ tm.name }}</h5>
             <div class="butt-group">

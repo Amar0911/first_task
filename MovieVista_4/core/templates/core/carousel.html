@@ -142,7 +142,6 @@
     padding: 6px;
     border-radius: 25px;
     font-size: 13px;
-    font-weight: 10px;
   }
   
   
@@ -162,7 +161,7 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <a href="{% url "cardplay_carousel" cm.id %}">
           <img src="{{cm.carousel_image.url}}" class="d-block w-100" alt="..." height="500px">
-        </a>
+          </a>
           <div class="carousel-caption">
             <div class="content">
                 <h1 id="title">{{cm.name}}</h1>
@@ -176,7 +175,7 @@
             </div>
             <a href="" class="btns">
             <button type="button" class="watch">Watch Now</button>
-          </a>
+            </a>
           </div>
         </div>
       {% endfor %}
