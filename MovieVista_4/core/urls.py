@@ -32,6 +32,7 @@ urlpatterns = [
     path('cardplay_hollywood/<int:id>/',views.cardplay_hollywood,name='cardplay_hollywood'),
     path('cardplay_carousel/<int:id>/',views.cardplay_carousel,name='cardplay_carousel'),
     path('watchlistadd/<int:id>/',views.watchlistadd,name='watchlistadd'),
+    path('watchlistremove/<int:id>/',views.watchlist_remove,name='watchlistremove'),
     path('watchlist/',views.watchlist,name='watchlist'),
     
 ]

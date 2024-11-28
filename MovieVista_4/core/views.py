@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import Registerform,AuthenticationForm,ChangePasswordForm,AdminProfileForm,UserProfileForm,CustomerForm
+from .forms import Registerform,AuthenticationForm,ChangePasswordForm,AdminProfileForm,UserProfileForm,ContactForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood,Movies
@@ -169,16 +169,53 @@ def profile(request):
             else:
                 adm = UserProfileForm(instance = request.user)
         return render(request,'core/profile.html', {'name': request.user, 'adm': adm})
+    else:
+        return redirect('login')
 
 
-############################################################## Footer ###############################################################
+############################################################## About ###############################################################
 
 
 def about(request):
     return render(request,'core/about.html')
 
+
+############################################################## Contact ########################################################
+
+
 def contact(request):
-    return render(request,'core/contact.html')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                # Check if the email in the form matches the logged-in user's email
+                user_email = form.cleaned_data.get('email')
+                if user_email != request.user.email:
+                    messages.error(request, 'The email address does not match your registered email.')
+                else:
+                    # Save the form
+                    form.save()
+
+                    # Send a thank-you email to the user
+                    subject = "Thank You for Contacting Us"
+                    message = f"Dear {request.user.username},\n\nThank you for reaching out! We have received your message and will get back to you soon.\n\nBest regards,\nMovieVista Team"
+                    from_email = 'cricketguru789@gamil.com'
+                    recipient_list = [user_email]
+
+                    try:
+                        send_mail(subject, message, from_email, recipient_list)
+                        messages.success(request, 'Your request has been sent successfully, and a confirmation email has been sent to you.')
+                    except Exception as e:
+                        messages.error(request, f"Message sent, but there was an error sending the confirmation email: {e}")
+
+                    return redirect('contact')
+            else:
+                messages.error(request, 'There was an error sending your message. Please try again.')
+        else:
+            form = ContactForm()
+        return render(request, 'core/contact.html', {'form': form})
+    else:
+        return redirect('login')
 
 
 
@@ -260,7 +297,7 @@ def password_reset_done(request):
 
 def watchlistadd(request, id):
     if request.user.is_authenticated:
-        movie =Trending_movies.objects.get(pk=id)
+        movie = Trending_movies.objects.get(pk=id)
         user = request.user
         if Movies.objects.filter(user=user, films=movie).exists():
             messages.error(request, 'This movie is already added in your Watchlist')
@@ -279,3 +316,17 @@ def watchlist(request):
     else:
         return redirect('login')
 
+
+def watchlist_remove(request, id):
+    if request.user.is_authenticated:
+        movie = get_object_or_404(Trending_movies, pk=id)
+        user = request.user
+        watchlist = Movies.objects.filter(user=user, films=movie).first()
+        if watchlist:
+            watchlist.delete()
+            messages.success(request, 'Removed from Watchlist')
+        else:
+            messages.error(request, 'This movie is not your watchlist')
+        return redirect('watchlist')
+    else:
+        return redirect('login')

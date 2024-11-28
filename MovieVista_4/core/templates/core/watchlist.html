@@ -96,6 +96,18 @@
   .wish-toggle:checked + .fa-heart {
     color: red; 
   }
+
+
+  .message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; 
+    width: 300px; 
+    text-align: center;
+    margin: auto; 
+    border-radius: 5px; 
+  }
   
 </style>
 
@@ -104,6 +116,15 @@
 <br>
 
 <div class="container-fluid">
+
+  {% if messages %}
+    <div class="alert alert-danger message-container">
+        {% for message in messages %}
+            <span>{{ message }}</span>
+        {% endfor %}
+    </div>
+  {% endif %}
+  
   <div class="row">
     <div class="see-more">
       <h5 class="heading" style="color: white;">Watch List</h5>
@@ -119,7 +140,7 @@
               <a href="">
                 <button class="btn btn-watch"><i class="fa-solid fa-film"></i> Watch Trailer</button>
               </a>
-              <a href="#">
+              <a href="{% url "watchlistremove" m.films.id %}">
                 <label class="btn btn-wishlist card-wish">
                   <input type="checkbox" class="wish-toggle" style="display: none;">
                   <i class="fa-regular fa-heart"></i> Watchlist

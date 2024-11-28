@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood,CustomerDetail,Movies
+from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood,Movies,Contact
 
 # Register your models here.
 
@@ -37,11 +37,12 @@ class HollywoodAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(CustomerDetail)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['id','user','name','address','city','state','pincode']
-
-
 @admin.register(Movies)
 class MoviesAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'films']
+
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'email' ,'message']

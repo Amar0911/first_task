@@ -1,7 +1,8 @@
 from django import forms 
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordChangeForm,UserChangeForm
 from django.contrib.auth.models import User
-from .models import CustomerDetail
+from .models import Contact
+
 
 
 
@@ -45,10 +46,8 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields =['username','first_name','last_name','email']
+        fields =['username','email']
         widgets= {'username':forms.TextInput(attrs={'class':'form-control'}),
-                  'first_name':forms.TextInput(attrs={'class':'form-control'}),
-                  'last_name':forms.TextInput(attrs={'class':'form-control'}),
                   'email':forms.TextInput(attrs={'class':'form-control'}),
                   }
 
@@ -68,18 +67,18 @@ class AdminProfileForm(UserChangeForm):
                   }
         
 
-        
-class CustomerForm(forms.ModelForm):
+
+class ContactForm(forms.ModelForm):
+
     class Meta:
-        model = CustomerDetail
-        fields=['name','address','city','state','pincode']
-        labels ={'name':'Full Name'}
-        widgets= {'name':forms.TextInput(attrs={'class':'form-control'}),
-                  'address':forms.TextInput(attrs={'class':'form-control'}),
-                  'city':forms.TextInput(attrs={'class':'form-control'}),
-                  'state':forms.Select(attrs={'class':'form-control'}),
-                  'pincode':forms.NumberInput(attrs={'class':'form-control'}),
-                  }
+        model = Contact
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'email' : forms.EmailInput(attrs={'class': 'form-control'}),
+            'message' : forms.Textarea(attrs={'class': 'form-control'})
+        } 
+
 
 
 
