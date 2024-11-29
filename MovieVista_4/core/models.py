@@ -11,12 +11,9 @@ from django.contrib.auth.models import User
 
 class Carousel_movies(models.Model):
       
-    CATEGORY_CHOICES = [
-        ('CAROUSEL' , 'carousel')
-    ]
 
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    category = models.CharField(max_length=20)
     movie_vista_original = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     description=models.TextField()
@@ -33,12 +30,9 @@ class Carousel_movies(models.Model):
 
 class Trending_movies(models.Model):
     
-    TRENDING_CHOICES = [
-        ('TRENDING' , 'trending')
-    ]
 
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=TRENDING_CHOICES)
+    category = models.CharField(max_length=20)
     movie_vista_original = models.CharField(max_length=100, default= 'Movie Vista Original')
     genre = models.CharField(max_length=100)
     description=models.TextField()
@@ -58,12 +52,9 @@ class Trending_movies(models.Model):
 
 class Anime_movies(models.Model):
     
-    ANIME_CHOICES = [
-        ('ANIME' , 'anime')
-    ]
 
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=ANIME_CHOICES)
+    category = models.CharField(max_length=20)
     movie_vista_original = models.CharField(max_length=100, default= 'Movie Vista Original')
     genre = models.CharField(max_length=100)
     description=models.TextField()
@@ -81,12 +72,9 @@ class Anime_movies(models.Model):
 
 class Indian_movies(models.Model):
     
-    INDIAN_CHOICES = [
-        ('INDIAN' , 'indian')
-    ]
 
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=INDIAN_CHOICES)
+    category = models.CharField(max_length=20)
     movie_vista_original = models.CharField(max_length=100, default= 'Movie Vista Original')
     genre = models.CharField(max_length=100)
     description=models.TextField()

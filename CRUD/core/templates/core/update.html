@@ -3,13 +3,12 @@
 
 {% block content %}
 
-<div class="home">
+<div class="home" style="text-align: center; color: white; border: 2px solid orange;">
     <h1 class='crud'>CRUD OPERATION</h1>
 </div>
 
-<div class="container">
+<div class="container" style="display: flex; justify-content: center;">
     <div class="row">
-        <div class="col-sm-4">
             <div class="update-form">
                 <form action="" method="POST">
                     {% csrf_token %}
@@ -21,7 +20,6 @@
                 
                 </form>
             </div>
-        </div>
     </div>
 </div>
 

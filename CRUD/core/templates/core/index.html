@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div class="home">
+<div class="home" style="text-align: center; color: white; border: 2px solid orange;">
     <h1 class='crud'>CRUD OPERATION</h1>
 </div>
 
 <div class="conatiner" id="con">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="border: 2px solid black;">
             <div class="add-info">
             <div class="heading">
                 <h1>Add Hero Details</h1>
@@ -17,7 +17,9 @@
                 <form action="" method="POST">
                     {% csrf_token %}
                     {{mf.as_p}}
-                    <input type="Submit" id="sub" value="Click Me" class="btn btn-success">
+                    <div class="save">
+                        <input type="Submit" value="Save" class="btn btn-success">
+                    </div>                   
                 </form>
             </div>
         </div>
@@ -25,7 +27,7 @@
         <div class="col-sm-7">
             <div class="avenger-database">
                 <h1 class="database">Avenger Database</h1>
-                <table class="table" style="border:5px solid black;">
+                <table class="table" style="border:3px solid black;">
                     <thead>
                         <tr>
                         <th scope="col">Id</th>

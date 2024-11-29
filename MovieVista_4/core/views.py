@@ -104,6 +104,17 @@ def register(request):
             rf = Registerform (request.POST)
             if rf.is_valid():
                 rf.save()
+                messages.success(request,'Registration Successfull !!')
+                email = request.POST['email']
+                user = User.objects.filter(email=email).first()
+                if user:
+                    send_mail(
+                        'Registration Successfull',
+                        f'Thank you for choosing us!!',
+                        'cricketguru798@gmail',  # Use a verified email address
+                        [email],
+                        fail_silently=False,
+                    )
                 return redirect('login')
         else:
             rf = Registerform()
@@ -199,7 +210,7 @@ def contact(request):
                     # Send a thank-you email to the user
                     subject = "Thank You for Contacting Us"
                     message = f"Dear {request.user.username},\n\nThank you for reaching out! We have received your message and will get back to you soon.\n\nBest regards,\nMovieVista Team"
-                    from_email = 'cricketguru789@gamil.com'
+                    from_email = 'cricketguru798@gmail.com'
                     recipient_list = [user_email]
 
                     try:
@@ -261,7 +272,7 @@ def forgotpassword(request):
             )
             return redirect('passwordresetdone')
         else:
-            messages.success(request,'please enter valid email address')
+            messages.success(request,'Please enter valid email address')
     return render(request, 'core/forgotpassword.html')                                        
     
 

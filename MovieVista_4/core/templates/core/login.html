@@ -164,6 +164,10 @@ form input[type="text"]:focus {
 
     }
 
+    .message-container {
+      height: 60px;
+    }
+
 
   </style>
 
@@ -183,6 +187,14 @@ form input[type="text"]:focus {
     </form>
     <a href="{% url 'signup' %}" class="register-link">Don't have an account? <p class="note">Register</p></a>
     <a href="{% url "forgotpassword" %}" class="forgot-password">Forgot Password?</a>
+
+    {% if messages %}
+    <div class="alert alert-info message-container">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
   </div>
 </section>
 
