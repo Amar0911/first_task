@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .forms import Registerform,AuthenticationForm,ChangePasswordForm,AdminProfileForm,UserProfileForm,ContactForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
-from .models import Carousel_movies,Trending_movies,Anime_movies,Indian_movies,Webseries,Hollywood,Movies
+from .models import Movie,Watchlist
 
 
 #================ Forgot Password ======================
@@ -21,76 +21,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-
 def index(request):
-    cm = Carousel_movies.objects.all()   #cm - Craousel movie
-    tm = Trending_movies.objects.all()   #tm - Trending movie
-    am = Anime_movies.objects.all()      #am - Anime
-    im = Indian_movies.objects.all()     #im - Indian movie
-    ws = Webseries.objects.all()         #ws - Webseries
-    hm = Hollywood.objects.all()         #hm - Hollywood movie
-    return render(request,'core/index.html',{'cm':cm,'tm':tm, 'am':am, 'im':im, 'ws': ws, 'hm': hm})
-
-
-
-############################################################## seemore ##############################################################
-
-
-
-def seemore_trending(request):
-    tm = Trending_movies.objects.all()
-    return render(request,'core/seemore_trending.html',{'tm': tm})
-
-
-def seemore_anime(request):
-    am = Anime_movies.objects.all()
-    return render(request,'core/seemore_anime.html',{'am': am})
-
-
-def seemore_indian(request):
-    im = Indian_movies.objects.all()
-    return render(request,'core/seemore_indian.html',{'im': im})
-
-
-def seemore_webseries(request):
-    ws = Webseries.objects.all()
-    return render(request,'core/seemore_webseries.html',{'ws': ws})
-
-
-
-def seemore_hollywood(request):
-    hm = Hollywood.objects.all()
-    return render(request,'core/seemore_hollywood.html',{'hm':hm})
-
-
-
-############################################################## cardplay ####################################################
-
-def cardplay_carousel(request,id):
-    cm = Carousel_movies.objects.get(pk=id)
-    return render(request,'core/cardplay_carousel.html',{'cm': cm}) 
-
-
-def cardplay(request,id):
-    tm = Trending_movies.objects.get(pk=id)
-    return render(request,'core/cardplay.html',{'tm': tm}) 
-
-def cardplay_anime(request,id):
-    am = Anime_movies.objects.get(pk=id)
-    return render(request,'core/cardplay_anime.html',{'am': am}) 
-
-def cardplay_indian(request,id):
-    im = Indian_movies.objects.get(pk=id)
-    return render(request,'core/cardplay_indian.html',{'im': im}) 
-
-def cardplay_webseries(request,id):
-    ws = Webseries.objects.get(pk=id)
-    return render(request,'core/cardplay_webseries.html',{'ws': ws}) 
-
-def cardplay_hollywood(request,id):
-    hm = Hollywood.objects.get(pk=id)
-    return render(request,'core/cardplay_hollywood.html',{'hm': hm}) 
-
+    return render(request,'core/index.html')
 
 
 
@@ -159,7 +91,7 @@ def log_out(request):
     return redirect('index')
     
 
-
+    
 ############################################################## Profile ###############################################################
 
 
@@ -183,13 +115,10 @@ def profile(request):
     else:
         return redirect('login')
 
-
-############################################################## About ###############################################################
-
+############################################################# About ########################################################
 
 def about(request):
     return render(request,'core/about.html')
-
 
 ############################################################## Contact ########################################################
 
@@ -248,9 +177,93 @@ def changepassword(request):
         return render(request,'core/changepassword.html',{'cp':cp})
     else:
         return redirect('login')
+
+############################################################# Seemore #################################################################
+
+def seemore(request):
+    tr = Movie.objects.filter(category ='TRENDING')
+    return render(request,'core/seemore.html',{'tr': tr})
+
+def seemore_anime(request):
+    am = Movie.objects.filter(category ='ANIME')
+    return render(request,'core/seemore_anime.html',{'am' : am})
+
+def seemore_indian(request):
+    im = Movie.objects.filter(category = 'INDIAN')
+    return render(request,'core/seemore_indian.html',{'im': im})
+
+def seemore_webseries(request):
+    ws = Movie.objects.filter(category = 'WEBSERIES')
+    return render(request,'core/seemore_webseries.html',{'ws': ws})
+
+def seemore_hollywood(request):
+    hm = Movie.objects.filter(category = 'HOLLYWOOD')
+    return render(request,'core/seemore_hollywood.html',{'hm': hm})
+
+
+############################################################## cardplay ####################################################
+
+def cardplay_carousel(request):
+    cm = Movie.objects.filter(category ='CAROUSEL')
+    return render(request,'core/cardplay_carousel.html',{'cm': cm})
+
+def cardplay_trending(request):
+    tr = Movie.objects.filter(category ='TRENDING')
+    return render(request,'core/cardplay_trending.html',{'tr': tr})
+
+def cardplay_anime(request):
+    am = Movie.objects.filter(category ='ANIME')
+    return render(request,'core/cardplay_anime.html',{'am' : am})
+
+def cardplay_indian(request):
+    im = Movie.objects.filter(category = 'INDIAN')
+    return render(request,'core/cardplay_indian.html',{'im': im})
+
+def cardplay_webseries(request):
+    ws = Movie.objects.filter(category = 'WEBSERIES')
+    return render(request,'core/cardplay_webseries.html',{'ws': ws})
+
+def cardplay_hollywood(request):
+    hm = Movie.objects.filter(category = 'HOLLYWOOD')
+    return render(request,'core/cardplay_hollywood.html',{'hm': hm})
+
+
+
+######################################################## Add to Watchlist ##############################################################
+
+
+
+def watchlistadd(request, id):
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(pk=id)
+        user = request.user
+        if Watchlist.objects.filter(user=user, films=movie).exists():
+            messages.error(request, 'This movie is already added to your Watchlist')
+        else:
+            Watchlist.objects.create(user=user, films=movie)
+            messages.success(request, 'Added to Watchlist')
+        return redirect('watchlist')
+    else:
+        return redirect('login')
+
+
+def watchlist(request):
+    if request.user.is_authenticated:
+        movies = Watchlist.objects.filter(user=request.user)  
+        return render(request, 'core/watchlist.html', {'movies': movies})
+    else:
+        return redirect('login')
     
 
-
+def watchlistremove(request, id):
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(pk=id)
+        Watchlist.objects.filter(user=request.user, films=movie).delete()
+        messages.success(request, 'Removed from Watchlist')
+        return redirect('watchlist')
+    else:
+        return redirect('login')
+    
 
 ############################################################# Forget Password #########################################################
     
@@ -298,46 +311,3 @@ def resetpassword(request, uidb64, token):
 
 def password_reset_done(request):
     return render(request, 'core/password_reset_done.html')
-
-
-
-
-######################################################## Add to Watchlist ##############################################################
-
-
-
-def watchlistadd(request, id):
-    if request.user.is_authenticated:
-        movie = Trending_movies.objects.get(pk=id)
-        user = request.user
-        if Movies.objects.filter(user=user, films=movie).exists():
-            messages.error(request, 'This movie is already added in your Watchlist')
-        else:
-            Movies(user=user, films=movie).save()
-            messages.success(request,'Added to Watchlist')
-        return redirect('seemore_trending')
-    else:
-        return redirect('login')
-
-
-def watchlist(request):
-    if request.user.is_authenticated:
-        movie = Movies.objects.filter(user=request.user)
-        return render(request, 'core/watchlist.html',{'movie':movie})
-    else:
-        return redirect('login')
-
-
-def watchlist_remove(request, id):
-    if request.user.is_authenticated:
-        movie = get_object_or_404(Trending_movies, pk=id)
-        user = request.user
-        watchlist = Movies.objects.filter(user=user, films=movie).first()
-        if watchlist:
-            watchlist.delete()
-            messages.success(request, 'Removed from Watchlist')
-        else:
-            messages.error(request, 'This movie is not your watchlist')
-        return redirect('watchlist')
-    else:
-        return redirect('login')
