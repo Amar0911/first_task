@@ -106,7 +106,7 @@
 
     {% for im in im %}
     <div class="col-md-3 mb-3">
-      <a href=""> 
+      <a href="{% url "cardplay_indian" im.id %}"> 
         <div class="card hover-effect">
           <img src="{{ im.movie_image.url }}" class="card-img-top" alt="Card Image" style="width: 100%; height: 100%; object-fit: cover;">
           <div class="card-body">

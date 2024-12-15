@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 
-{% block title %} {{cm.name}} {% endblock title %}
+{% block title %} {{tm.name}} {% endblock title %}
 
 {% block content %}
 
@@ -41,6 +41,7 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     pointer-events: none; 
   }
+
   
   .movie-image img {
     width: 100%;
@@ -52,13 +53,13 @@
     position: absolute;
     top: 70px;
     left: 0;
-    padding: 20px;
+    padding: 30px;
     color: #fff;
     flex-direction: column;
   }
 
   .movie-details:hover {
-    background: rgb(0, 0, 0, .2)
+    background: rgb(0, 0, 0, 0.3)
   }
   
   .movie-summary {
@@ -196,23 +197,23 @@
     <div id="cardplay" class="container"> 
     <div class="movie-card"> 
         <div class="movie-image"> 
-            <img src="{{ cm.movie_image.url }}" class="" alt=""> 
+            <img src="{{ am.movie_image.url }}" class="" alt=""> 
             <div class="movie-details"> 
                 <div class="movie-summary"> 
-                    <h1 id="title">{{ cm.name }}</h1>
-                    <p>{{cm.description}}</p>
+                    <h1 id="title">{{am.name }}</h1>
+                    <p>{{tr.description}}</p>
                     <ul class="movie-info">
-                        <li><strong>Starcast:</strong> {{cm.starcast}}</li>
-                        <li><strong>Director:</strong> {{cm.director}}</li>
+                        <li><strong>Starcast:</strong> {{am.starcast}}</li>
+                        <li><strong>Director:</strong> {{am.director}}</li>
                     </ul>
                     <h6>Movie Vista Original</h6> 
-                    <h5 id="genre">{{cm.genre}}</h5>
-                    <h4 id="yeear">{{cm.release_year}}</h4>
-                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{cm.rating}}</span></h3>
+                    <h5 id="genre">{{am.genre}}</h5>
+                    <h4 id="yeear">{{am.re_year}}</h4>
+                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{am.rating}}</span></h3>
                 </div>
                 <div class="button-group">
-                    <a href="Trendingmovietrailer/John wick.mp4" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
-                    <a href="#" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
+                    <a href="" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
+                    <a href="" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
                 </div> 
             </div>
         </div> 

@@ -203,27 +203,27 @@ def seemore_hollywood(request):
 
 ############################################################## cardplay ####################################################
 
-def cardplay_carousel(request):
-    cm = Movie.objects.filter(category ='CAROUSEL')
-    return render(request,'core/cardplay_carousel.html',{'cm': cm})
-
-def cardplay_trending(request):
+def cardplay_trending(request,id):
     tr = Movie.objects.filter(category ='TRENDING')
     return render(request,'core/cardplay_trending.html',{'tr': tr})
 
-def cardplay_anime(request):
+def cardplay_carousel(request, id):
+    cm = Movie.objects.filter(category ='Carousel')
+    return render(request,'core/cardplay_carousel.html',{'cm': cm})
+
+def cardplay_anime(request,id):
     am = Movie.objects.filter(category ='ANIME')
     return render(request,'core/cardplay_anime.html',{'am' : am})
 
-def cardplay_indian(request):
+def cardplay_indian(request,id):
     im = Movie.objects.filter(category = 'INDIAN')
     return render(request,'core/cardplay_indian.html',{'im': im})
 
-def cardplay_webseries(request):
+def cardplay_webseries(request,id):
     ws = Movie.objects.filter(category = 'WEBSERIES')
     return render(request,'core/cardplay_webseries.html',{'ws': ws})
 
-def cardplay_hollywood(request):
+def cardplay_hollywood(request,id):
     hm = Movie.objects.filter(category = 'HOLLYWOOD')
     return render(request,'core/cardplay_hollywood.html',{'hm': hm})
 
