@@ -204,27 +204,27 @@ def seemore_hollywood(request):
 ############################################################## cardplay ####################################################
 
 def cardplay_trending(request,id):
-    tr = Movie.objects.filter(category ='TRENDING')
+    tr = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_trending.html',{'tr': tr})
 
 def cardplay_carousel(request, id):
-    cm = Movie.objects.filter(category ='Carousel')
+    cm = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_carousel.html',{'cm': cm})
 
-def cardplay_anime(request,id):
-    am = Movie.objects.filter(category ='ANIME')
+def cardplay_anime(request,id): 
+    am = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_anime.html',{'am' : am})
 
 def cardplay_indian(request,id):
-    im = Movie.objects.filter(category = 'INDIAN')
+    im = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_indian.html',{'im': im})
 
 def cardplay_webseries(request,id):
-    ws = Movie.objects.filter(category = 'WEBSERIES')
+    ws = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_webseries.html',{'ws': ws})
 
 def cardplay_hollywood(request,id):
-    hm = Movie.objects.filter(category = 'HOLLYWOOD')
+    hm = Movie.objects.get(pk=id)
     return render(request,'core/cardplay_hollywood.html',{'hm': hm})
 
 
@@ -242,6 +242,7 @@ def watchlistadd(request, id):
         else:
             Watchlist.objects.create(user=user, films=movie)
             messages.success(request, 'Added to Watchlist')
+            # add = request.META.get('HTTP_REFERER',None)
         return redirect('watchlist')
     else:
         return redirect('login')
@@ -311,3 +312,19 @@ def resetpassword(request, uidb64, token):
 
 def password_reset_done(request):
     return render(request, 'core/password_reset_done.html')
+
+
+
+######################################################## Subscriptions #################################################################
+
+#===============For Paypal =========================
+# from paypal.standard.forms import PayPalPaymentsForm
+# from django.conf import settings
+# import uuid
+# from django.urls import reverse
+
+# def subscription(request):
+#     return render(request,'core/subscription.html')
+
+# def payment(request):
+#     return render(request,'core/payment.html')

@@ -33,6 +33,8 @@ urlpatterns = [
     path('cardplay_indian/<int:id>/',views.cardplay_indian,name='cardplay_indian'),
     path('cardplay_webseries/<int:id>/',views.cardplay_webseries,name='cardplay_webseries'),
     path('cardplay_hollywood/<int:id>/',views.cardplay_hollywood,name='cardplay_hollywood'),
+    # path('subscription',views.subscription,name="subscription"),
+    # path('payment',views.payment,name="payment")
 ]
 
 

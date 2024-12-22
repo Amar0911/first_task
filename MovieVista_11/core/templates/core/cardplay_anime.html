@@ -200,8 +200,8 @@
             <img src="{{ am.movie_image.url }}" class="" alt=""> 
             <div class="movie-details"> 
                 <div class="movie-summary"> 
-                    <h1 id="title">{{am.name }}</h1>
-                    <p>{{tr.description}}</p>
+                    <h1 id="title">{{am.Movie.name }}</h1>
+                    <p>{{am.description}}</p>
                     <ul class="movie-info">
                         <li><strong>Starcast:</strong> {{am.starcast}}</li>
                         <li><strong>Director:</strong> {{am.director}}</li>
@@ -213,7 +213,7 @@
                 </div>
                 <div class="button-group">
                     <a href="" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
-                    <a href="" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
+                    <a href="{% url "watchlistadd" am.id %}" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
                 </div> 
             </div>
         </div> 

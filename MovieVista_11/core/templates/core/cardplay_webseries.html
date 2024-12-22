@@ -200,20 +200,20 @@
             <img src="{{ ws.movie_image.url }}" class="" alt=""> 
             <div class="movie-details"> 
                 <div class="movie-summary"> 
-                    <h1 id="title">{{ tr.name }}</h1>
-                    <p>{{tr.description}}</p>
+                    <h1 id="title">{{ ws.name }}</h1>
+                    <p>{{ws.description}}</p>
                     <ul class="movie-info">
-                        <li><strong>Starcast:</strong> {{tr.starcast}}</li>
-                        <li><strong>Director:</strong> {{tr.director}}</li>
+                        <li><strong>Starcast:</strong> {{ws.starcast}}</li>
+                        <li><strong>Director:</strong> {{ws.director}}</li>
                     </ul>
                     <h6>Movie Vista Original</h6> 
-                    <h5 id="genre">{{tr.genre}}</h5>
-                    <h4 id="yeear">{{tr.re_year}}</h4>
-                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{tr.rating}}</span></h3>
+                    <h5 id="genre">{{ws.genre}}</h5>
+                    <h4 id="yeear">{{ws.re_year}}</h4>
+                    <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{ws.rating}}</span></h3>
                 </div>
                 <div class="button-group">
                     <a href="" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
-                    <a href="" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
+                    <a href="{% url "watchlistadd" ws.id %}" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
                 </div> 
             </div>
         </div> 
