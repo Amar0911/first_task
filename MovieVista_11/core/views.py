@@ -318,13 +318,13 @@ def password_reset_done(request):
 ######################################################## Subscriptions #################################################################
 
 #===============For Paypal =========================
-# from paypal.standard.forms import PayPalPaymentsForm
-# from django.conf import settings
-# import uuid
-# from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+import uuid
+from django.urls import reverse
 
-# def subscription(request):
-#     return render(request,'core/subscription.html')
+def subscription(request):
+    return render(request,'core/subscription.html')
 
-# def payment(request):
-#     return render(request,'core/payment.html')
+def payment(request):
+    return render(request,'core/payment.html')
