@@ -1,0 +1,23 @@
+
+{% block content %}
+
+<content>
+    <h1>Confirm Your Subscription</h1>
+    <div class="payment-details">
+        <p>Plan: {{ plan.name }}</p>
+        <p>Price: ₹{{ plan.price }}</p>
+        <p>Start Date: {{ subscription_start_date }}</p>
+        <p>End Date: {{ subscription_end_date }}</p>
+    </div>
+    <div class="paypal-form">
+        <h2>Proceed with Payment</h2>
+        <form method="post" action="https://sandbox.paypal.com">
+            {% csrf_token %}
+            {{ paypal }}
+            <button type="submit" class="paypal-button">Pay with PayPal</button>
+        </form>
+    </div>
+</content>
+
+{% endblock content %}
+
