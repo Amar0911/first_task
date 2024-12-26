@@ -25,12 +25,13 @@
     background: linear-gradient(90deg, #feb47b, #ff7e5f);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
+    color: black;
   }
   
-  .watch:active {
+  {% comment %} .watch:active {
     transform: translateY(2px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  }
+  } {% endcomment %}
   
   .btns {
     display: flex;
@@ -43,8 +44,8 @@
     border-radius: 15px;
     max-width: 630px;
     max-height: 400px; 
-    margin: auto;
-    text-align: center;
+    {% comment %} margin: auto; {% endcomment %}
+    text-align: left;
     color: white; 
   }
   
@@ -61,15 +62,15 @@
     font-weight: 300;
     line-height: 1.6;
     margin-bottom: 20px;
-    width: 500;
+    
   }
   
-  {% comment %} .carousel-caption .details h6 {
+   .carousel-caption .details h6 {
     font-size: 1rem;
     font-weight: bold;
     letter-spacing: 1.2px;
     margin-bottom: 10px;
-  } {% endcomment %}
+  } 
   
   .carousel-caption .details h5,
   .carousel-caption .details h4,

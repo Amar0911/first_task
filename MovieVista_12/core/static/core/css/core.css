@@ -614,6 +614,8 @@ h6, #genre, #yeear {
 }
 
 /* Responsive Design */
+
+/*
 @media (max-width: 768px) {
   #title {
       font-size: 1.5rem;

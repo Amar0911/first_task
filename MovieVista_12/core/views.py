@@ -348,12 +348,12 @@ def payment(request):
         plan = SubscriptionPlan.objects.get(id=plan_id)
     except SubscriptionPlan.DoesNotExist:
         messages.error(request, 'Subscription plan not found.')
-        return redirect('index')
+        return redirect('payment')
         
     existing_subscription = UserSubscription.objects.filter(user=request.user, is_active=True).first()
     if existing_subscription:
         messages.error(request, 'You already have an active subscription to a plan.')
-        return redirect('index')
+        return redirect('payment')
         
     end_date = timezone.now() + timedelta(days=plan.duration)
     user_subscription = UserSubscription.objects.create(
