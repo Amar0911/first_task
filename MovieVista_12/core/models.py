@@ -72,7 +72,7 @@ class UserSubscription(models.Model):
     plan = models.ForeignKey('SubscriptionPlan', on_delete=models.CASCADE)
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(null=True, blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('user', 'plan', 'is_active')

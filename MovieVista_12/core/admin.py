@@ -21,3 +21,8 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(SubscriptionPlan)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'duration']
+
+
+@admin.register(UserSubscription)
+class UserscriptionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'plan']

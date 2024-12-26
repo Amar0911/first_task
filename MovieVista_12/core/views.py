@@ -360,7 +360,7 @@ def payment(request):
         user=request.user,
         plan=plan,
         end_date=end_date,
-        is_active=False  
+        is_active=True  
     )
 
         
