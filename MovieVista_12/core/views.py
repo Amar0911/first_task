@@ -328,6 +328,7 @@ from datetime import timedelta
 import uuid
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm  
+from django.urls import reverse
         
         
 def subscription(request):
@@ -338,7 +339,7 @@ def subscription(request):
         
 def payment(request):
     plan_id = request.GET.get('plan_id')
-        
+    
     if not plan_id:
         messages.error(request, 'No plan selected.')
         return redirect('subscription')
@@ -388,8 +389,33 @@ def payment(request):
         
     return render(request, 'core/payment.html', context)
 
+
+
+
 def payment_success(request):
-    return render(request, 'core/payment_success')
+    subscription_id = request.GET.get('subscription_id')
+
+    if not subscription_id:
+        messages.error(request, 'Invalid subscription details.')
+        return redirect('subscription')
+
+    try:
+        user_subscription = UserSubscription.objects.get(id=subscription_id, user=request.user)
+    except UserSubscription.DoesNotExist:
+        messages.error(request, 'Subscription not found.')
+        return redirect('subscription')
+
+
+    user_subscription.is_active = True
+    user_subscription.save()
+
+    context = {
+        'subscription': user_subscription,
+        'plan': user_subscription.plan,
+    }
+    return render(request, 'core/payment_success.html', context)
+
+
 
 def payment_failed(request):
     return render(request, 'core/payment_failed')
