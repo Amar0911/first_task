@@ -133,7 +133,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
 
-PAYPAL_RECEIVER_EMAIL = 'https://sandbox.paypal.com' # where cash is paid into i.e Merchant receiver mail
+PAYPAL_RECEIVER_EMAIL = 'movievistafilm@business.example.com' # where cash is paid into i.e Merchant receiver mail
 PAYPAL_TEST = True
 
 # Default primary key field type
