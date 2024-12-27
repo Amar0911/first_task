@@ -42,9 +42,44 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+
+
+  .message-container {
+    display: flex;
+    flex-direction: column; /* Stack messages vertically */
+    align-items: center; /* Center messages horizontally */
+    justify-content: center; /* Center messages vertically if needed */
+    text-align: center; /* Center text inside the container */
+    margin: 20px auto; /* Center container with auto margins */
+    padding: 15px 20px;
+    max-width: 600px; /* Optional: limit the width for better layout */
+    background-color: #f8d7da; /* Light red background for danger alert */
+    border: 1px solid #f5c6cb; /* Border matching the alert color */
+    border-radius: 5px; /* Rounded corners */
+    color: #721c24; /* Dark red text for readability */
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for emphasis */
+}
+
+.message-container span {
+    display: inline-block; /* Ensures messages are on separate lines */
+    margin: 5px 0; /* Adds spacing between each message */
+    line-height: 1.5; /* Improves readability */
+}
+
+
 </style>
 
 <main>
+
+  {% if messages %}
+    <div class="alert alert-danger message-container">
+        {% for message in messages %}
+            <span>{{ message }}</span>
+        {% endfor %}
+    </div>
+  {% endif %}
+
   <div class="container mt-5">
     <div class="text-center mb-4">
       <h1 class="display-5" style="color: white;">Subscribe now and start streaming</h1>

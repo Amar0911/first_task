@@ -36,7 +36,11 @@
 
       <!-- Subscription -->
       <div class="mx-auto">
+        {% if request.user.existing_subscription %}
+        <a href=""></a>
+        {% else %}
         <a href="{% url "subscription" %}" class="nav-link subscription-link"><i class="fa-solid fa-box"></i> Subscription</a>
+        {% endif %}
       </div>
 
       <!-- Navbar Toggle Button -->

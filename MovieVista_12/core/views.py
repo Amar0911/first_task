@@ -19,7 +19,7 @@ from django.http import HttpResponse
 ##########################################################################################################################################
 
 
-# Create your views here.
+
 
 def index(request):
     return render(request,'core/index.html')
@@ -336,49 +336,53 @@ def subscription(request):
     return render(request, 'core/subscription.html', {'plans': plans})
         
         
-        
+
+
 def payment(request):
     plan_id = request.GET.get('plan_id')
-    
+
     if not plan_id:
         messages.error(request, 'No plan selected.')
         return redirect('subscription')
-        
-    try:
-        plan = SubscriptionPlan.objects.get(id=plan_id)
-    except SubscriptionPlan.DoesNotExist:
+
+    # Check if the plan exists
+    plan = SubscriptionPlan.objects.filter(id=plan_id).first()
+    if not plan:
         messages.error(request, 'Subscription plan not found.')
-        return redirect('payment')
-        
+        return redirect('subscription')
+
+    # Check if the user already has an active subscription
     existing_subscription = UserSubscription.objects.filter(user=request.user, is_active=True).first()
     if existing_subscription:
         messages.error(request, 'You already have an active subscription to a plan.')
-        return redirect('payment')
-        
+        return redirect('subscription')
+
+    # Calculate subscription end date
     end_date = timezone.now() + timedelta(days=plan.duration)
+
+    # Create a new subscription
     user_subscription = UserSubscription.objects.create(
         user=request.user,
         plan=plan,
         end_date=end_date,
-        is_active=True  
+        is_active=True  # Initially inactive until payment is confirmed
     )
 
-        
-           
+    # PayPal payment setup
     host = request.get_host()
     paypal_checkout = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': plan.price,
         'item_name': plan.name,
-        'invoice': uuid.uuid4(),
+        'invoice': str(uuid.uuid4()),  # Unique invoice ID
         'currency_code': 'USD',
-        'notify_url': f"http://{host}{reverse('paypal-ipn')}",  
-        'return_url': f"http://{host}{reverse('payment_success')}", 
-        'cancel_url': f"http://{host}{reverse('payment_failed')}",  
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",
+        'return_url': f"http://{host}{reverse('payment_success')}?subscription_id={user_subscription.id}",
+        'cancel_url': f"http://{host}{reverse('payment_failed')}",
     }
-        
+
     paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
-        
+
     context = {
         'paypal': paypal_payment,
         'plan': plan,
@@ -386,10 +390,8 @@ def payment(request):
         'subscription_start_date': timezone.now(),
         'subscription_end_date': end_date,
     }
-        
+
     return render(request, 'core/payment.html', context)
-
-
 
 
 def payment_success(request):
@@ -399,13 +401,13 @@ def payment_success(request):
         messages.error(request, 'Invalid subscription details.')
         return redirect('subscription')
 
-    try:
-        user_subscription = UserSubscription.objects.get(id=subscription_id, user=request.user)
-    except UserSubscription.DoesNotExist:
+    # Check if the subscription exists
+    user_subscription = UserSubscription.objects.filter(id=subscription_id, user=request.user).first()
+    if not user_subscription:
         messages.error(request, 'Subscription not found.')
         return redirect('subscription')
 
-
+    # Activate the subscription
     user_subscription.is_active = True
     user_subscription.save()
 
