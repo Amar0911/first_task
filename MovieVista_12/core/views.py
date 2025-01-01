@@ -422,4 +422,7 @@ def payment_success(request):
 def payment_failed(request):
     return render(request, 'core/payment_failed')
 
+def play(request):
+    return render(request,'core/play.html')
+
 

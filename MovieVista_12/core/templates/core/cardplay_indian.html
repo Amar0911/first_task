@@ -212,7 +212,7 @@
                     <h3><span id="rating">IMDB</span> <i class="fa-solid fa-star"></i><span style="font-size: 20px; padding: 0 5px;">{{im.rating}}</span></h3>
                 </div>
                 <div class="button-group">
-                    <a href="" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
+                    <a href="{% url "play" im.id %}" class="btn btn-play"><i class="fa-solid fa-play"></i> Watch Now</a>
                     <a href="{% url "watchlistadd" im.id %}" class="btn btn-wishlist"><i class="fa-regular fa-heart"></i> Watchlist</a>
                 </div> 
             </div>
