@@ -338,6 +338,7 @@ def subscription(request):
         
 
 
+
 def payment(request):
     plan_id = request.GET.get('plan_id')
 
@@ -352,21 +353,32 @@ def payment(request):
         return redirect('subscription')
 
     # Check if the user already has an active subscription
-    existing_subscription = UserSubscription.objects.filter(user=request.user, is_active=True).first()
-    if existing_subscription:
+    existing_active_subscription = UserSubscription.objects.filter(user=request.user, is_active=True).first()
+    if existing_active_subscription:
         messages.error(request, 'You already have an active subscription to a plan.')
         return redirect('subscription')
 
-    # Calculate subscription end date
-    end_date = timezone.now() + timedelta(days=plan.duration)
-
-    # Create a new subscription
-    user_subscription = UserSubscription.objects.create(
+    # Check if there is an inactive subscription for the same plan
+    existing_inactive_subscription = UserSubscription.objects.filter(
         user=request.user,
         plan=plan,
-        end_date=end_date,
-        is_active=True  # Initially inactive until payment is confirmed
-    )
+        is_active=False
+    ).first()
+
+    if existing_inactive_subscription:
+        # Update the existing inactive subscription
+        existing_inactive_subscription.end_date = timezone.now() + timedelta(days=plan.duration)
+        existing_inactive_subscription.save()
+        user_subscription = existing_inactive_subscription
+    else:
+        # Create a new subscription
+        end_date = timezone.now() + timedelta(days=plan.duration)
+        user_subscription = UserSubscription.objects.create(
+            user=request.user,
+            plan=plan,
+            end_date=end_date,
+            is_active=False  # Initially inactive
+        )
 
     # PayPal payment setup
     host = request.get_host()
@@ -388,7 +400,7 @@ def payment(request):
         'plan': plan,
         'user': request.user,
         'subscription_start_date': timezone.now(),
-        'subscription_end_date': end_date,
+        'subscription_end_date': user_subscription.end_date,
     }
 
     return render(request, 'core/payment.html', context)
@@ -407,22 +419,32 @@ def payment_success(request):
         messages.error(request, 'Subscription not found.')
         return redirect('subscription')
 
-    # Activate the subscription
-    user_subscription.is_active = True
-    user_subscription.save()
+    payment_confirmed = True  
 
-    context = {
-        'subscription': user_subscription,
-        'plan': user_subscription.plan,
-    }
-    return render(request, 'core/payment_success.html', context)
+    if payment_confirmed:
+        # Activate the subscription
+        user_subscription.is_active = True
+        user_subscription.save()
+
+        context = {
+            'subscription': user_subscription,
+            'plan': user_subscription.plan,
+        }
+        return render(request, 'core/payment_success.html', context)
+    else:
+        messages.error(request, 'Payment could not be verified. Please try again.')
+        return redirect('subscription')
 
 
 
 def payment_failed(request):
-    return render(request, 'core/payment_failed')
+    messages.error(request, 'Payment was canceled or failed. No subscription was activated.')
+    return render(request, 'core/payment_failed.html')
+
 
 def play(request):
     return render(request,'core/play.html')
+
+
 
 
